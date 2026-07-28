@@ -44,14 +44,14 @@ def connect_dobot():
 # KONFIGURASI KOORDINAT DOBOT
 # =========================================================
 Z_HOVER = 50
-Z_PICK = -12
+Z_PICK = -8
 HOME_R = 0
 
-HOME_X = 4.5
-HOME_Y = 270
-HOME_Z = 50
+HOME_X = 111
+HOME_Y = -191
+HOME_Z = 100
 
-CONVEYOR_SPEED = 0.25
+CONVEYOR_SPEED = 0.45
 CONVEYOR_DELAY = 1.16
 
 

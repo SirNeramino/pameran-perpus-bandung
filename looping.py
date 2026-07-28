@@ -16,9 +16,9 @@ from Computer_Vision import (
 # =========================================================
 # TITIK STANDBY (Posisi setelah homing)
 # =========================================================
-STANDBY_X = 4.5
-STANDBY_Y = 270
-STANDBY_Z = 50
+STANDBY_X = 111
+STANDBY_Y = -191
+STANDBY_Z = 100
 
 def main():
     # 1. Robot Homing
@@ -90,12 +90,12 @@ def main():
                 # 7. Arm memindahkan objek ke posisi acak
                 rand_x = random.uniform(145, 220)
                 rand_y = random.uniform(-240, -165)
-                rand_angle = random.uniform(0, 90)
+                rand_angle = random.uniform(0, 45)
                 print(f"[ARM] Memindahkan objek ke posisi acak X: {rand_x:.2f}, Y: {rand_y:.2f}...")
 
                 device.move_to(rand_x, rand_y, Z_HOVER, angle, wait=True)
-                # Turun ke Z=-12 untuk menaruh objek seperti pada skrip aslinya
-                device.move_to(rand_x, rand_y, -12, rand_angle, wait=True) 
+                # Turun ke Z=-8 untuk menaruh objek seperti pada skrip aslinya
+                device.move_to(rand_x, rand_y, -8, rand_angle, wait=True) 
 
                 # 8. Arm melepas objek
                 device.suck(False)
