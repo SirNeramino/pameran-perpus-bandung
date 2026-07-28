@@ -14,7 +14,7 @@ def main():
     global ROI_X, ROI_Y, ROI_W, ROI_H
     
     # Menyiapkan kamera dengan konfigurasi standar yang dipakai sistem utama (640x480)
-    cap = setup_camera(fps=30, width=640, height=480)
+    cap = setup_camera(fps=30, width=1280, height=720)
     
     if not cap.isOpened():
         print("[ERROR] Kamera tidak dapat dibuka!")
