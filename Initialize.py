@@ -32,6 +32,5 @@ def main():
     print("[INFO] Homing dianggap selesai, siap menjalankan conveyor!")
     sys.exit(0)
 
-
 if __name__ == "__main__":
     main()
