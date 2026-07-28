@@ -5,8 +5,12 @@ import numpy as np
 cap = cv2.VideoCapture(0) # Sesuaikan indeks kamera
 
 cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
-cap.set(cv2.CAP_PROP_FPS, 30)
+cap.set(cv2.CAP_PROP_FPS, 24)
 cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+
+# === SETTING RESOLUSI 800x600 ===
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 800)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)
 
 # --- Rentang Warna ---
 color_ranges = {
@@ -20,7 +24,7 @@ color_ranges = {
 }
 
 # --- Definisi Kotak ROI ---
-ROI_X, ROI_Y, ROI_W, ROI_H = 245, 0, 185, 140
+ROI_X, ROI_Y, ROI_W, ROI_H = 305, 455, 230, 145
 
 print("=== PROGRAM KALIBRASI KAMERA DIMULAI ===")
 print("Taruh objek di atas area ROI untuk melihat koordinatnya.")

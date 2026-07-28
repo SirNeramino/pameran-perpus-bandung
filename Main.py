@@ -324,7 +324,7 @@ def run_manual(target_col, target_row):
 
         publish_system_mode("manual")
 
-        cap = setup_camera(fps=30, width=640, height=480)
+        cap = setup_camera(fps=24, width=800, height=600)
         start_conveyor()
         publish_conveyor_state(True)
 

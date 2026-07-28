@@ -5,7 +5,7 @@ from Computer_Vision import setup_camera
 
 # --- KOORDINAT AWAL ROI ---
 # Nilai default awal diambil dari Computer_Vision.py
-ROI_X, ROI_Y, ROI_W, ROI_H = 245, 0, 185, 140
+ROI_X, ROI_Y, ROI_W, ROI_H = 305, 455, 230, 145
 
 # Langkah pergeseran (piksel) setiap kali tombol ditekan
 STEP = 5
@@ -14,7 +14,7 @@ def main():
     global ROI_X, ROI_Y, ROI_W, ROI_H
     
     # Menyiapkan kamera dengan konfigurasi standar yang dipakai sistem utama (640x480)
-    cap = setup_camera(fps=30, width=720, height=1280)
+    cap = setup_camera(fps=24, width=800, height=600)
     
     if not cap.isOpened():
         print("[ERROR] Kamera tidak dapat dibuka!")
