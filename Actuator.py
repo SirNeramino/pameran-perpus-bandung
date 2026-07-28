@@ -215,7 +215,7 @@ def start_conveyor():
         return
 
     print("[CONVEYOR] START")
-    device.conveyor_belt(speed=CONVEYOR_SPEED, direction=1)
+    device.conveyor_belt(speed=CONVEYOR_SPEED, direction=-1)
 
 
 def stop_conveyor():
@@ -225,4 +225,4 @@ def stop_conveyor():
         return
 
     print("[CONVEYOR] STOP")
-    device.conveyor_belt(speed=0, direction=1)
+    device.conveyor_belt(speed=0, direction=-1)
