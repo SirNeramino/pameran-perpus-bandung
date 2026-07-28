@@ -94,7 +94,7 @@ def main():
 
                 device.move_to(rand_x, rand_y, Z_HOVER, angle, wait=True)
                 # Turun ke Z=-45 untuk menaruh objek seperti pada skrip aslinya
-                device.move_to(rand_x, rand_y, -45, angle, wait=True) 
+                device.move_to(rand_x, rand_y, -12, angle, wait=True) 
 
                 # 8. Arm melepas objek
                 device.suck(False)
