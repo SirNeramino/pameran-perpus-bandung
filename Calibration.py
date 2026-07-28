@@ -16,7 +16,7 @@ color_ranges = {
     ],
     "Hijau": [(np.array([40, 50, 50]), np.array([90, 255, 255]))],
     "Kuning": [(np.array([20, 100, 100]), np.array([30, 255, 255]))],
-    "Biru": [(np.array([100, 150, 0]), np.array([140, 255, 255]))]
+    "Biru": [(np.array([95, 80, 50]), np.array([135, 255, 255]))]
 }
 
 # --- Definisi Kotak ROI ---
