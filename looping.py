@@ -90,18 +90,19 @@ def main():
                 # 7. Arm memindahkan objek ke posisi acak
                 rand_x = random.uniform(145, 220)
                 rand_y = random.uniform(-240, -165)
+                rand_angle = random.uniform(0, 90)
                 print(f"[ARM] Memindahkan objek ke posisi acak X: {rand_x:.2f}, Y: {rand_y:.2f}...")
 
                 device.move_to(rand_x, rand_y, Z_HOVER, angle, wait=True)
-                # Turun ke Z=-45 untuk menaruh objek seperti pada skrip aslinya
-                device.move_to(rand_x, rand_y, -12, angle, wait=True) 
+                # Turun ke Z=-12 untuk menaruh objek seperti pada skrip aslinya
+                device.move_to(rand_x, rand_y, -12, rand_angle, wait=True) 
 
                 # 8. Arm melepas objek
                 device.suck(False)
                 time.sleep(1)
                 
                 # Naik kembali ke posisi aman
-                device.move_to(rand_x, rand_y, Z_HOVER, angle, wait=True)
+                device.move_to(rand_x, rand_y, Z_HOVER, rand_angle, wait=True)
                 device.move_to(STANDBY_X, STANDBY_Y, STANDBY_Z, HOME_R, wait=True)
 
                 # 9. Conveyor kembali jalan (Loop)
