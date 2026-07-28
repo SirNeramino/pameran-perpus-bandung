@@ -50,7 +50,7 @@ def parse_pairs(pair_list):
 def run_manual(target_col, target_row):
     print(f"[VISION] Memulai misi drop-off ke Grid Manual: Kolom {target_col}, Baris {target_row}")
 
-    cap = setup_camera(fps=30, width=320, height=240)
+    cap = setup_camera(fps=30, width=640, height=480)
     start_conveyor()
     object_found = False
 

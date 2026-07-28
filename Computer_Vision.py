@@ -20,7 +20,7 @@ def is_inside_roi(cX, cY):
     """True jika titik (koordinat global) berada di dalam batas ROI."""
     return ROI_X <= cX <= ROI_X + ROI_W and ROI_Y <= cY <= ROI_Y + ROI_H
 
-def setup_camera(fps=30, width=1920, height=1080):
+def setup_camera(fps=30, width=640, height=480):
     """Inisialisasi VideoCapture dengan parameter standar yang dipakai kedua mode."""
     cap = cv2.VideoCapture(0)  # Sesuaikan indeks kamera Anda (0, 1, atau 2)
     cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
