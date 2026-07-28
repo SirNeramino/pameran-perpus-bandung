@@ -5,6 +5,8 @@ import json
 import threading
 import argparse
 
+import paho.mqtt.client as mqtt
+
 from Actuator import start_conveyor, stop_conveyor, arm_move, connect_dobot
 from Computer_Vision import (
     setup_camera,
