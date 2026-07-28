@@ -24,7 +24,7 @@ color_ranges = {
 }
 
 # --- Definisi Kotak ROI ---
-ROI_X, ROI_Y, ROI_W, ROI_H = 305, 455, 230, 145
+ROI_X, ROI_Y, ROI_W, ROI_H = 235, 145, 235, 150
 
 print("=== PROGRAM KALIBRASI KAMERA DIMULAI ===")
 print("Taruh objek di atas area ROI untuk melihat koordinatnya.")

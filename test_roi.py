@@ -5,7 +5,7 @@ from Computer_Vision import setup_camera
 
 # --- KOORDINAT AWAL ROI ---
 # Nilai default awal diambil dari Computer_Vision.py
-ROI_X, ROI_Y, ROI_W, ROI_H = 305, 455, 230, 145
+ROI_X, ROI_Y, ROI_W, ROI_H = 235, 145, 235, 150
 
 # Langkah pergeseran (piksel) setiap kali tombol ditekan
 STEP = 5

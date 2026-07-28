@@ -13,7 +13,7 @@ COLOR_RANGES = {
 }
 
 # Definisi ROI (Area Deteksi). Sesuaikan dengan posisi fisik conveyor di kamera.
-ROI_X, ROI_Y, ROI_W, ROI_H = 305, 455, 230, 145
+ROI_X, ROI_Y, ROI_W, ROI_H = 235, 145, 235, 150
 MIN_CONTOUR_AREA = 500
 
 def is_inside_roi(cX, cY):
