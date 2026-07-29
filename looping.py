@@ -30,7 +30,7 @@ def main():
 
     print("[INFO] Memulai proses Homing (sekitar 20 detik)...")
     device.home()
-    time.sleep(20)
+    time.sleep(30)
 
     # 2. Pergi ke titik yang ditentukan tepat setelah homing
     print("[INFO] Homing selesai. Bergerak ke titik standby...")
