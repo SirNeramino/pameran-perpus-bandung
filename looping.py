@@ -88,7 +88,7 @@ def main():
                 device.move_to(target_x, target_y, Z_HOVER, HOME_R, wait=True)
 
                 # 7. Arm memindahkan objek ke posisi acak
-                rand_x = random.uniform(145, 220)
+                rand_x = random.uniform(175, 220)
                 rand_y = random.uniform(-240, -165)
                 rand_angle = random.uniform(0, 45)
                 print(f"[ARM] Memindahkan objek ke posisi acak X: {rand_x:.2f}, Y: {rand_y:.2f}...")
