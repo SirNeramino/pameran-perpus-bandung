@@ -1,83 +1,66 @@
-"""
-Melakukan homing fisik Dobot sekali, lalu masuk ke loop
-untuk menuliskan koordinat Dobot saat ini di terminal secara real-time.
-
-Menggunakan connect_dobot() dari Actuator.py sebagai satu-satunya
-sumber koneksi, supaya konsisten dengan sistem pick-and-place yang
-sudah berjalan.
-"""
-import sys
+from serial.tools import list_ports
+from pydobotplus import Dobot
 import time
-from Actuator import connect_dobot
-
-
-def do_homing(device):
-    """Menjalankan homing dan menunggu sampai benar-benar selesai."""
-    print("[INFO] Memulai proses Homing. Pastikan area sekitar robot KOSONG!")
-    try:
-        # Jika versi pydobotplus kamu mendukung wait=, ini paling akurat:
-        # Dobot sendiri yang memberi tahu kapan homing selesai lewat queue,
-        # bukan menebak durasi dengan sleep tetap.
-        device.home(wait=True)
-        print("[INFO] Homing selesai (terkonfirmasi oleh device).")
-    except TypeError:
-        # Fallback untuk versi pydobotplus yang home()-nya tidak menerima wait=
-        print("[INFO] Menunggu homing selesai (30 detik, estimasi)...")
-        device.home()
-        time.sleep(30)
-        print("[INFO] Homing selesai (estimasi waktu).")
-
-
-def read_loop(device):
-    """Loop membaca dan menampilkan pose Dobot secara real-time."""
-    print("-" * 55)
-    print("Membaca koordinat... (Tekan Ctrl+C untuk menghentikan program)")
-    print("-" * 55)
-
-    while True:
-        try:
-            pose = device.pose()
-        except Exception as e:
-            print(f"[WARNING] Gagal membaca pose dari Dobot: {e}")
-            time.sleep(0.5)
-            continue
-
-        if pose:
-            try:
-                x, y, z, r, j1, j2, j3, j4 = pose
-                print(f"Koordinat -> X: {x:6.2f} | Y: {y:6.2f} | Z: {z:6.2f} | R: {r:6.2f}")
-            except (ValueError, TypeError) as e:
-                print(f"[WARNING] Format pose tidak sesuai: {e}")
-        else:
-            print("[WARNING] Pose kosong diterima dari Dobot.")
-
-        time.sleep(0.5)
-
+import sys
 
 def main():
-    device = connect_dobot()
-    if device is None:
-        print("[ERROR] Gagal terhubung ke Dobot. Program dibatalkan.")
+    print("=== PROGRAM KONTROL DOBOT (WINDOWS STABLE) ===")
+    
+    # 1. Deteksi Port
+    available_ports = list_ports.comports()
+    if not available_ports:
+        print("ERROR: Dobot tidak terdeteksi.")
         sys.exit(1)
+    
+    port = available_ports[0].device
+    print(f"Menghubungkan ke Dobot di port: {port}...")
 
     try:
-        do_homing(device)
-        read_loop(device)
-
-    except KeyboardInterrupt:
-        print("\n[INFO] Program dihentikan oleh pengguna.")
-
+        # 2. Inisialisasi koneksi 
+        device = Dobot(port=port)
+        print("Koneksi berhasil dibuat!")
     except Exception as e:
-        print(f"[ERROR] Terjadi kesalahan tak terduga: {e}")
+        print(f"Gagal terhubung ke Dobot. Error: {e}")
+        sys.exit(1)
 
+    # 3. Melakukan Homing Kalibrasi Mekanik
+    print("\n[INFO] Memulai proses Homing (sekitar 25 detik)...")
+    device.home()
+    time.sleep(25) # Menunggu kalibrasi fisik mesin selesai
+
+    # 4. Pindah ke Posisi Standby
+    home_x, home_y, home_z, home_r = 250, 0, 50, 0
+    print(f"[INFO] Homing selesai. Bergerak ke koordinat Standby X:{home_x} Y:{home_y} Z:{home_z} R:{home_r}...")
+    device.move_to(home_x, home_y, home_z, home_r, wait=True)
+    print("Posisi Standby tercapai.\n")
+
+    # 5. Looping untuk mencetak koordinat
+    print("=== SISTEM PEMBACAAN KOORDINAT AKTIF ===")
+    print("Tekan Ctrl+C di terminal untuk berhenti.\n")
+    
+    try:
+        while True:
+            current_pos = device.get_pose()
+            
+            if current_pos:
+                # Mengakses atribut berdasarkan struktur internal kelas Pose -> Position
+                x = current_pos.position.x
+                y = current_pos.position.y
+                z = current_pos.position.z
+                r = current_pos.position.r
+                
+                print(f"Koordinat Saat Ini -> X: {x:.2f} | Y: {y:.2f} | Z: {z:.2f} | R: {r:.2f}")
+            else:
+                print("Gagal membaca koordinat dari sensor (Data kosong).")
+                
+            time.sleep(1)
+            
+    except KeyboardInterrupt:
+        print("\n[INFO] Looping dihentikan oleh pengguna.")
+        
     finally:
-        try:
-            device.close()
-            print("[INFO] Koneksi ke Dobot ditutup.")
-        except Exception as e:
-            print(f"[WARNING] Gagal menutup koneksi dengan bersih: {e}")
-        sys.exit(0)
-
+        device.close()
+        print("[INFO] Koneksi Dobot diputus dengan aman.")
 
 if __name__ == "__main__":
     main()
